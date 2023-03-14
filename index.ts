@@ -11,10 +11,10 @@ app.use(express.json());
 
 const port = process.env.PORT;
 const httpServer = http.createServer(app);
-const io = new Server(httpServer,{
+const io = new Server(httpServer, {
   cors: {
-    methods: ['GET', 'POST']
-  }
+    methods: ['GET', 'POST'],
+  },
 });
 
 httpServer.listen(port, () => {
@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', function () {
     console.log('user disconnected');
   });
-  socket.on('send-message', function(){
+  socket.on('send-message', function () {
     console.log(`message from ${socket.id}`);
     io.to('game2').emit('recive-msg');
   });
